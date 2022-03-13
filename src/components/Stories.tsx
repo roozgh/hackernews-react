@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Collapse } from "antd";
+import { Collapse, Empty } from "antd";
 import { Story } from "./Story";
 import { Item as StoryI } from "../types/hackernews";
-import { getTopStoryIDs, getTopStoriesDetails } from "../services/api";
+import { getTopStoryIDs, getItemsDetails } from "../services/api";
+import { Comments } from "./Comments";
 
 export const Stories = () => {
   const [stories, setStories] = useState<StoryI[]>([]);
@@ -10,8 +11,8 @@ export const Stories = () => {
   useEffect(() => {
     const fetch = async () => {
       const topStoryIDs = await getTopStoryIDs();
-      const topXStoryIDs = topStoryIDs.slice(0, 10);
-      const stories = await getTopStoriesDetails(topXStoryIDs);
+      const topXStoryIDs = topStoryIDs.slice(0, 20);
+      const stories = await getItemsDetails(topXStoryIDs);
       const topStories = topXStoryIDs.map((storyID) =>
         stories.find(({ id }) => id === storyID)
       ) as StoryI[];
@@ -23,10 +24,13 @@ export const Stories = () => {
   return (
     <Collapse accordion>
       {stories.map((story, index) => (
-        <Collapse.Panel
-          header={<Story story={story} index={index + 1} />}
-          key={story.id}
-        ></Collapse.Panel>
+        <Collapse.Panel header={<Story story={story} index={index + 1} />} key={story.id}>
+          {!story.kids ? (
+            <Empty description="No Comments Yet" image={Empty.PRESENTED_IMAGE_SIMPLE} />
+          ) : (
+            <Comments kids={story.kids.slice(0, 3)} />
+          )}
+        </Collapse.Panel>
       ))}
     </Collapse>
   );

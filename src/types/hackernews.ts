@@ -8,4 +8,9 @@ export interface Item {
   title: string;
   url: string;
   type: string;
+  text: string;
 }
+
+export type Comment = Item & { childComments: Comment[] };
+
+export type CommentTree = Comment[];

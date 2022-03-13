@@ -18,6 +18,6 @@ export const getItem = (itemID: number): Promise<Item> => {
   return axios.get(`item/${itemID}.json`);
 };
 
-export const getTopStoriesDetails = async (storyIDs: number[]) => {
+export const getItemsDetails = async (storyIDs: number[]) => {
   return Promise.all(storyIDs.map(getItem));
 };
