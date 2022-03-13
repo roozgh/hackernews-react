@@ -1,7 +1,8 @@
 {
-  "name": "hackernews",
-  "version": "0.1.0",
-  "private": true,
+  "name": "hackernews-react",
+  "version": "1.0.0",
+  "description": "Hacker News Story feed done with React",
+  "homepage": "https://roozgh.github.io/hackernews-react",
   "dependencies": {
     "antd": "4.19.2",
     "axios": "0.26.1",
