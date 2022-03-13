@@ -46,10 +46,8 @@ export const Comments = ({ kids }: CommentsProps) => {
         }
         return commentTree;
       };
-
       const comments = await getCommentsRecursively(kids);
       setComments(comments);
-      console.log(comments);
     };
     fetch();
   }, [kids]);

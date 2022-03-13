@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Collapse, Empty } from "antd";
+import { config } from "../config";
 import { Story } from "./Story";
 import { Item as StoryI } from "../types/hackernews";
 import { getTopStoryIDs, getItemsDetails } from "../services/api";
@@ -11,7 +12,7 @@ export const Stories = () => {
   useEffect(() => {
     const fetch = async () => {
       const topStoryIDs = await getTopStoryIDs();
-      const topXStoryIDs = topStoryIDs.slice(0, 20);
+      const topXStoryIDs = topStoryIDs.slice(0, config.MAX_STORIES);
       const stories = await getItemsDetails(topXStoryIDs);
       const topStories = topXStoryIDs.map((storyID) =>
         stories.find(({ id }) => id === storyID)
@@ -28,7 +29,7 @@ export const Stories = () => {
           {!story.kids ? (
             <Empty description="No Comments Yet" image={Empty.PRESENTED_IMAGE_SIMPLE} />
           ) : (
-            <Comments kids={story.kids.slice(0, 3)} />
+            <Comments kids={story.kids.slice(0, config.MAX_COMMENTS)} />
           )}
         </Collapse.Panel>
       ))}
