@@ -1,9 +1,11 @@
 export interface Item {
   id: number;
+  by: string;
+  descendants: number;
+  kids: number[];
   time: number;
   score: number;
-  by: string;
   title: string;
   url: string;
-  type: "story" | "comment";
+  type: string;
 }
