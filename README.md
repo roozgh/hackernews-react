@@ -1,6 +1,6 @@
 # Hacker News React
 
-This app displays the current Hacker News top 10 stories. It's built using React & Typescript.
+This app displays the current Hacker News top 10 stories. It's built using React & Typescript. A live demo of this app can be [viewed here](https://roozgh.github.io/hackernews-react/)
 
 ## Development
 
