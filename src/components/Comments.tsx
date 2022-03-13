@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Comment as AntComment, Spin } from "antd";
 import { formatDistanceToNow } from "date-fns";
+import { config } from "../config";
 import { Comment, CommentTree } from "../types/hackernews";
 import { getItemsDetails } from "../services/api";
 
@@ -44,7 +45,7 @@ export const Comments = ({ kids }: CommentsProps) => {
           }
           commentTree.push(comment);
         }
-        return commentTree;
+        return commentTree.slice(0, config.MAX_COMMENTS);
       };
       const comments = await getCommentsRecursively(kids);
       setComments(comments);
